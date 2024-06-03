@@ -127,7 +127,7 @@ kernel void winograd(const __global float *data, const __global float *filters, 
                     img_local_tile_id] = transformed_img_buf[i];
         }
         for (int i = 0; i < transformed_buf_size; ++i) {
-          local_buf[local_img_buf_size + i * CHANNELS_PER_GROUP * TILES_PER_GROUP + filter_channel_begin *                          TILES_PER_GROUP + filter_local_tile_id] = filter_buf[i];
+          local_buf[local_img_buf_size + i * CHANNELS_PER_GROUP * TILES_PER_GROUP + filter_channel_begin * TILES_PER_GROUP + filter_local_tile_id] = filter_buf[i];
         }
 
         barrier(CLK_LOCAL_MEM_FENCE);

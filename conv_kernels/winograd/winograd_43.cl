@@ -66,14 +66,14 @@ kernel void winograd(const __global float *data, const __global float *filters, 
     const int local_img_buf_size = transformed_buf_size * CHANNELS_PER_GROUP * TILES_PER_GROUP;
 
     int img_offset_c = img_num * img_size * N_channels + img_size * img_channel_begin;
-    int filter_offset = filter_tile_offset * transformed_buf_size * N_channels + transformed_buf_size *                                 filter_channel_begin;
+    int filter_offset = filter_tile_offset * transformed_buf_size * N_channels + transformed_buf_size * filter_channel_begin;
     const int local_el_stride = TILES_PER_GROUP * CHANNELS_PER_GROUP;
     
     int cur_row = row_to_process_init;
     int cur_col = col_to_process_init;
     for (int c = 0; c < N_channels; c += CHANNELS_PER_GROUP) {
 
-        if ((row_to_process_init < H) && (col_to_process_init < W) && (img_num < N_objects) &&                                ((img_channel_begin + c) < N_channels)) {
+        if ((row_to_process_init < H) && (col_to_process_init < W) && (img_num < N_objects) && ((img_channel_begin + c) < N_channels)) {
 
             for (int my_el = 0; my_el < img_buf_size; ++my_el) {
                 cur_row = row_to_process_init + my_el / img_buf_W;
@@ -81,7 +81,7 @@ kernel void winograd(const __global float *data, const __global float *filters, 
                 
                 if ((cur_row >= 0) && (cur_row < H) && (cur_col >= 0) && (cur_col < W)) {
                     matrix_buf[(my_el % img_buf_W) * img_buf_W + my_el / img_buf_W] =
-                    data[img_offset_c + c * img_size + (row_to_process_init + (my_el / img_buf_W)) * W +                                 col_to_process_init + my_el % img_buf_W];
+                    data[img_offset_c + c * img_size + (row_to_process_init + (my_el / img_buf_W)) * W + col_to_process_init + my_el % img_buf_W];
                 } else {
                     matrix_buf[(my_el % img_buf_W) * img_buf_W + my_el / img_buf_W] = 0;
                 }

@@ -58,7 +58,7 @@ kernel void winograd(const __global float *data, const __global float *filters, 
 
     const int filter_num = filter_tile_offset_group + img_local_id;
 
-    float accum_buf[ACCUM_BUF_SIZE_FILTER][ACCUM_BUF_SIZE_IMG] ={{0}};
+    float accum_buf[ACCUM_BUF_SIZE_FILTER][ACCUM_BUF_SIZE_IMG] = {{0}};
     float accum_img[ACCUM_BUF_SIZE_IMG] = {0}, accum_kern[ACCUM_BUF_SIZE_FILTER] = {0};
 
     __local float local_buf[local_buf_size];
