@@ -81,7 +81,8 @@ kernel void winograd(const __global float *data, const __global float *filters, 
                 
                 if ((cur_row >= 0) && (cur_row < H) && (cur_col >= 0) && (cur_col < W)) {
                     matrix_buf[(my_el % img_buf_W) * img_buf_W + my_el / img_buf_W] =
-                    data[img_offset_c + c * img_size + (row_to_process_init + (my_el / img_buf_W)) * W + col_to_process_init + my_el % img_buf_W];
+                    data[img_offset_c + c * img_size + (row_to_process_init + (my_el / img_buf_W)) * W + 
+                         col_to_process_init + my_el % img_buf_W];
                 } else {
                     matrix_buf[(my_el % img_buf_W) * img_buf_W + my_el / img_buf_W] = 0;
                 }
