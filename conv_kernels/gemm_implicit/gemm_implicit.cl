@@ -109,7 +109,7 @@ kernel void GEMM_implicit(const __global float *data, const __global float *filt
                  
             if ((cur_img_num < N_objects) && (cur_filter_num < N_filters)
             && (cur_img_el_num < res_img_size)) { 
-        		output[cur_img_num * res_img_size * M + cur_filter_num * res_img_size + cur_img_el_num]
+        	output[cur_img_num * res_img_size * M + cur_filter_num * res_img_size + cur_img_el_num]
                 = res[m][n];
             }
         }
